@@ -1,9 +1,18 @@
+ConnectionType: CSV | Parquet | DuckDB | SQLServer | Oracle | MongoDB | Snowflake | BigQuery
+ConnectionLocation: LocalPath | S3Path | __EachDBProvider__ConnectionString
+
 Connection
 FriendlyName: String
-Type: CSV | Parquet | DuckDB | SQLServer | Oracle | MongoDB | Snowflake | BigQuery
-Location: LocalPath | S3Path | __EachDBProvider__ConnectionString
-
-
+Type: ConnectionType
+Location: ConnectionLocation
+ShadowType?: ConnectionType
+ShadowConnectionLocation?: ConnectionLocation
+...TODO source speciic settings ...
+CreatedTs: DataTime
+LastConnectionAttemptTs: DataTime
+LastConnectionResult: NeverConnected | ConnectedSuccesfully | ConnectionFailed
+MaxConnectionAttemptDurationSecond: int
+MaxQueryAttemptDurationSecond: int
 
 Connection Collection: 
 Name: String
@@ -38,8 +47,9 @@ DataDisplayFrame:
 Rows?: List[DataDisplayRow]
 Sentinel?: IsFirst | IsLast
 DataFetchStatus: NotStarted | InProgress | Completed_Successfully | Completed_Errored
-NextPointer: FileByterOffset | RowOffset | .....TODO
-
+NextPointer: FileByteOffset | RowOffset | .....TODO cursor, etc for each source ..
+FetchedAtTs: DataTime
+FetchDurationMs: int
 
 
 
